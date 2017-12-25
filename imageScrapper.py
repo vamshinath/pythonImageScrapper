@@ -25,7 +25,7 @@ def download(urls,path):
 		filename=url.split('/')[-1]
 
 		print ("Downloading {}".format(url))
-		url=re.sub(r'thumb.','',url)
+		#url=re.sub(r'thumb.','',url)
 		data=requests.get(url)
 		
 		file=open(path+"/"+filename,"wb")
