@@ -48,7 +48,8 @@ def scrap(url,dirr):
 
 	#debg.close
 	imglinks=set(imglinks)
-	download(imglinks,dirr+"/imageScrapper")
+	subpath=re.sub('[^A-Za-z0-9]+','',url.split('/')[2])[:9]
+	download(imglinks,dirr+"/imageScrapper/"+subpath)
 
 def main():	
 	url=input("enter url:")
