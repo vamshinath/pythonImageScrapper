@@ -4,13 +4,14 @@ from tkinter import filedialog
 from bs4 import BeautifulSoup as soup
 from urllib.parse import urljoin
 import os, re, requests, sys
-import matplotlib.pyplot as plt
-import signal,time
+import signal,time,random,string
 import webbrowser
 
 chances = 5
 pgno=0
 # debg=open("debug_ImgScrap.txt","a")
+def random_generator(size=3, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for x in range(size))
 def skip():
     global chances
     chances=5
@@ -50,7 +51,7 @@ def download(urls, path):
 
             data = requests.get(url)
 
-            file = open(path + "/" + filename, "wb")
+            file = open(path + "/" +random_generator()+ filename, "wb")
             for chunk in data.iter_content(chunk_size=2048):
                 if chunk:
                     file.write(chunk)
@@ -65,7 +66,7 @@ def download(urls, path):
 def scrap(url, dirr):
     global label
     try:
-        label['text'] = "Downloading....."
+        #label['text'] = "Downloading....."
         page = requests.get(url)
         html = soup(page.text, "html.parser")
         images = html.findAll('img')
@@ -101,6 +102,7 @@ def clicked():
         else:
             #webbrowser.open(url+actname+str(pgno)+"/index.html")
             #time.sleep(5)
+            label['text'] = "Hello "#+str(pgno)
             scrap(url+actname+str(pgno)+"/index.html", path+"/"+actname+"/"+actname+str(pgno))
             
             chances=5
