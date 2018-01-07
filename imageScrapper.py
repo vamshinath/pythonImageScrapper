@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import os,re,requests,sys
 #debg=open("debug_ImgScrap.txt","a")
 
-
+#function to remove thumbnails
 def cleanup(path):
 	os.chdir(path)
 	print ("Cleaning Up in:{}"+path) 
@@ -14,6 +14,8 @@ def cleanup(path):
 			os.remove(fl)
 
 
+
+#downloads url(s) to specified path
 def download(urls,path):
 
 	if not os.path.exists(path):
@@ -36,7 +38,7 @@ def download(urls,path):
 
 	cleanup(path)
 
-
+#main driver...very IMP
 def scrap(url,dirr):
 	preurl=re.sub(url.split("/")[-1],"",url)
 	page=requests.get(url)
